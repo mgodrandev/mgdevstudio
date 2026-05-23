@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MGDev Studio — Applications mobiles</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#6C63FF;
+  --purple-dark:#4A44CC;
+  --purple-light:#A09BFF;
+  --bg:#080818;
+  --bg2:#0E0E2A;
+  --bg3:#13133A;
+  --text:#FFFFFF;
+  --text-muted:rgba(255,255,255,0.55);
+  --border:rgba(108,99,255,0.2);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,24,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;letter-spacing:-0.02em;color:var(--text)}
+.nav-logo span{color:var(--purple)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:0.9rem;transition:color 0.2s;cursor:pointer}
+.nav-links a:hover{color:var(--text)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%, rgba(108,99,255,0.15) 0%, transparent 70%)}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:rgba(108,99,255,0.08);filter:blur(80px);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero-content{position:relative;max-width:760px}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(108,99,255,0.12);border:1px solid var(--border);border-radius:100px;padding:0.4rem 1rem;font-size:0.8rem;color:var(--purple-light);margin-bottom:2rem;letter-spacing:0.05em}
+.hero-badge span{width:6px;height:6px;border-radius:50%;background:var(--purple);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+h1{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,7vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1.5rem}
+h1 .accent{color:var(--purple)}
+.hero-sub{font-size:1.1rem;color:var(--text-muted);max-width:520px;margin:0 auto 2.5rem;line-height:1.7}
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--purple);color:#fff;text-decoration:none;padding:0.85rem 2rem;border-radius:100px;font-weight:500;font-size:0.95rem;transition:all 0.2s;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--purple-dark);transform:translateY(-2px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--text);text-decoration:none;padding:0.85rem 2rem;border-radius:100px;font-weight:500;font-size:0.95rem;border:1px solid rgba(255,255,255,0.15);transition:all 0.2s;cursor:pointer;margin-left:1rem}
+.btn-ghost:hover{border-color:var(--purple);color:var(--purple)}
+
+/* APPS */
+.section{padding:6rem 2rem;max-width:1100px;margin:0 auto}
+.section-label{font-size:0.75rem;letter-spacing:0.12em;color:var(--purple);font-weight:500;margin-bottom:0.75rem;text-transform:uppercase}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:1rem}
+.section-sub{color:var(--text-muted);max-width:480px;margin-bottom:3.5rem;font-size:1rem}
+
+.app-card{background:var(--bg2);border:1px solid var(--border);border-radius:24px;padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-bottom:2rem;position:relative;overflow:hidden}
+.app-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--purple),transparent)}
+.app-icon{width:72px;height:72px;border-radius:18px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1.5rem}
+.app-name{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:0.5rem}
+.app-category{font-size:0.75rem;letter-spacing:0.1em;color:var(--purple-light);margin-bottom:1rem;text-transform:uppercase}
+.app-desc{color:var(--text-muted);line-height:1.7;margin-bottom:1.75rem;font-size:0.95rem}
+.app-features{list-style:none;display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.75rem}
+.app-features li{background:rgba(108,99,255,0.1);border:1px solid var(--border);border-radius:100px;padding:0.3rem 0.85rem;font-size:0.8rem;color:var(--purple-light)}
+.badge-coming{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:0.25rem 0.75rem;font-size:0.75rem;color:var(--text-muted)}
+
+.app-visual{background:var(--bg3);border-radius:16px;padding:1.5rem;border:1px solid var(--border);text-align:center}
+.phone-mock{width:180px;margin:0 auto;background:#0A0A1F;border-radius:28px;border:2px solid rgba(108,99,255,0.3);padding:1.2rem 0.8rem;position:relative}
+.phone-mock::before{content:'';display:block;width:60px;height:6px;background:rgba(255,255,255,0.1);border-radius:10px;margin:0 auto 1rem}
+.mock-balance{background:linear-gradient(135deg,rgba(108,99,255,0.3),rgba(108,99,255,0.1));border-radius:14px;padding:1rem;margin-bottom:0.75rem;text-align:left}
+.mock-label{font-size:0.5rem;color:rgba(255,255,255,0.5);margin-bottom:0.25rem}
+.mock-amount{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700}
+.mock-row{display:flex;gap:0.5rem;margin-bottom:0.5rem}
+.mock-tx{flex:1;background:rgba(255,255,255,0.04);border-radius:8px;padding:0.5rem;font-size:0.45rem;color:rgba(255,255,255,0.6)}
+.mock-tx span{display:block;font-size:0.55rem;color:#fff;margin-bottom:2px}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:1.25rem}
+.stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--purple);line-height:1}
+.stat-label{font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem}
+
+/* CONTACT */
+.contact-card{background:var(--bg2);border:1px solid var(--border);border-radius:24px;padding:3rem;text-align:center;position:relative;overflow:hidden}
+.contact-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 50% 100%,rgba(108,99,255,0.1),transparent)}
+.contact-email{color:var(--purple-light);font-size:1.1rem;text-decoration:none;display:inline-block;margin-top:1rem}
+.contact-email:hover{color:var(--purple)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--text-muted);font-size:0.85rem}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 2rem}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-content>*{animation:fadeUp 0.7s ease both}
+.hero-badge{animation-delay:0.1s}
+h1{animation-delay:0.2s}
+.hero-sub{animation-delay:0.3s}
+.hero-cta{animation-delay:0.4s}
+
+@media(max-width:768px){
+  .app-card{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .btn-ghost{margin-left:0;margin-top:0.75rem}
+  .hero-cta{display:flex;flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">MG<span>Dev</span> Studio</div>
+  <ul class="nav-links">
+    <li><a onclick="document.getElementById('apps').scrollIntoView({behavior:'smooth'})">Applications</a></li>
+    <li><a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">À propos</a></li>
+    <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span></span> Studio indépendant</div>
+    <h1>Des apps <span class="accent">utiles</span><br>et bien designées</h1>
+    <p class="hero-sub">MGDev Studio crée des applications mobiles pensées pour simplifier le quotidien, avec un soin particulier pour le design et l'expérience utilisateur.</p>
+    <div class="hero-cta">
+      <a href="#apps" class="btn-primary">Voir nos apps</a>
+      <a href="#contact" class="btn-ghost">Nous contacter</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section" id="apps">
+  <p class="section-label">Applications</p>
+  <h2 class="section-title">Nos créations</h2>
+  <p class="section-sub">Des outils pensés pour vous accompagner au quotidien.</p>
+
+  <div class="app-card">
+    <div>
+      <div class="app-icon" style="background:none;padding:0;overflow:hidden"><img src="playstore.png" alt="Finovo" style="width:72px;height:72px;border-radius:18px;display:block"></div>
+      <p class="app-category">Finance personnelle · Android</p>
+      <h3 class="app-name">Finovo</h3>
+      <p class="app-desc">Gérez votre budget personnel simplement. Suivez vos revenus et dépenses, visualisez vos statistiques et exportez vos rapports en PDF.</p>
+      <ul class="app-features">
+        <li>Suivi des dépenses</li>
+        <li>Budgets par catégorie</li>
+        <li>Export PDF</li>
+        <li>Stats mensuelles</li>
+        <li>Mode Pro sans pub</li>
+      </ul>
+      <a href="https://play.google.com/store/apps/details?id=com.finovo.budget" target="_blank" class="btn-primary" style="font-size:0.85rem;padding:0.7rem 1.5rem">
+        ↗ Télécharger sur Google Play
+      </a>
+    </div>
+    <div class="app-visual">
+      <div class="phone-mock">
+        <div class="mock-balance">
+          <div class="mock-label">Solde disponible</div>
+          <div class="mock-amount">1 250,00 €</div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-tx"><span>Courses</span>-42,50 €</div>
+          <div class="mock-tx"><span>Salaire</span>+2 100 €</div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-tx"><span>Loyer</span>-650 €</div>
+          <div class="mock-tx"><span>Transport</span>-28 €</div>
+        </div>
+      </div>
+      <p style="font-size:0.75rem;color:var(--text-muted);margin-top:1rem">Disponible sur Google Play</p>
+    </div>
+  </div>
+
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:24px;padding:2rem;display:flex;align-items:center;gap:1.5rem">
+    <div style="width:56px;height:56px;border-radius:14px;background:rgba(108,99,255,0.1);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0">✦</div>
+    <div>
+      <p style="font-family:'Syne',sans-serif;font-weight:600;margin-bottom:0.25rem">Prochaine application</p>
+      <p style="color:var(--text-muted);font-size:0.9rem">De nouvelles apps sont en cours de développement. Restez connectés !</p>
+    </div>
+    <div class="badge-coming" style="margin-left:auto;flex-shrink:0">En développement</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section" id="about">
+  <div class="about-grid">
+    <div>
+      <p class="section-label">À propos</p>
+      <h2 class="section-title">Un studio indépendant passionné</h2>
+      <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem">MGDev Studio est un studio de développement mobile indépendant basé en Guadeloupe. Notre mission : créer des applications simples, utiles et bien conçues pour améliorer le quotidien des utilisateurs.</p>
+      <p style="color:var(--text-muted);line-height:1.8">Chaque app est pensée avec soin, de l'interface à l'expérience utilisateur, en passant par les performances et la confidentialité.</p>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">1</div>
+          <div class="stat-label">App publiée</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Indépendant</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">🇬🇵</div>
+          <div class="stat-label">Guadeloupe</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2026</div>
+          <div class="stat-label">Fondé en</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--bg2);border-radius:24px;border:1px solid var(--border);padding:2rem">
+      <p style="font-family:'Syne',sans-serif;font-weight:600;margin-bottom:1.5rem;font-size:1.1rem">Notre stack</p>
+      <div style="display:flex;flex-direction:column;gap:0.75rem">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;background:var(--bg3);border-radius:10px;border:1px solid var(--border)">
+          <span style="font-size:0.9rem">Flutter</span>
+          <span style="font-size:0.75rem;color:var(--purple-light)">Mobile</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;background:var(--bg3);border-radius:10px;border:1px solid var(--border)">
+          <span style="font-size:0.9rem">RevenueCat</span>
+          <span style="font-size:0.75rem;color:var(--purple-light)">Monétisation</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;background:var(--bg3);border-radius:10px;border:1px solid var(--border)">
+          <span style="font-size:0.9rem">AdMob</span>
+          <span style="font-size:0.75rem;color:var(--purple-light)">Publicité</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;background:var(--bg3);border-radius:10px;border:1px solid var(--border)">
+          <span style="font-size:0.9rem">Google Play</span>
+          <span style="font-size:0.75rem;color:var(--purple-light)">Distribution</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section" id="contact">
+  <div class="contact-card">
+    <p class="section-label" style="margin-bottom:0.75rem">Contact</p>
+    <h2 class="section-title">Une question ? Une idée ?</h2>
+    <p style="color:var(--text-muted);max-width:440px;margin:0 auto 1.5rem">N'hésitez pas à nous contacter pour toute question concernant nos applications ou pour signaler un problème.</p>
+    <a href="mailto:mgodrandev@gmail.com" class="contact-email">mgodrandev@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 MGDev Studio · Guadeloupe · <a href="https://mgodrandev.github.io/finovo-privacy/" style="color:var(--purple-light);text-decoration:none">Politique de confidentialité</a></p>
+</footer>
+
+</body>
+</html>
